@@ -74,7 +74,8 @@ type Document struct {
 	// created at
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	// XXX: remove for now
+	//CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
 	// currency
 	Currency *string `json:"currency,omitempty"`
@@ -110,7 +111,8 @@ type Document struct {
 	// edited at
 	// Read Only: true
 	// Format: date-time
-	EditedAt strfmt.DateTime `json:"edited_at,omitempty"`
+	// XXX: remove for now
+	//EditedAt strfmt.DateTime `json:"edited_at,omitempty"`
 
 	// external id
 	ExternalID *string `json:"external_id,omitempty"`
@@ -242,9 +244,11 @@ func (m *Document) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateCreatedAt(formats); err != nil {
-		res = append(res, err)
-	}
+	/*
+		if err := m.validateCreatedAt(formats); err != nil {
+			res = append(res, err)
+		}
+	*/
 
 	if err := m.validateCustomerSnapshot(formats); err != nil {
 		res = append(res, err)
@@ -262,9 +266,11 @@ func (m *Document) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEditedAt(formats); err != nil {
-		res = append(res, err)
-	}
+	/*
+		if err := m.validateEditedAt(formats); err != nil {
+			res = append(res, err)
+		}
+	*/
 
 	if err := m.validateItems(formats); err != nil {
 		res = append(res, err)
@@ -360,6 +366,7 @@ func (m *Document) validateCalcVatFrom(formats strfmt.Registry) error {
 	return nil
 }
 
+/*
 func (m *Document) validateCreatedAt(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.CreatedAt) { // not required
@@ -372,6 +379,7 @@ func (m *Document) validateCreatedAt(formats strfmt.Registry) error {
 
 	return nil
 }
+*/
 
 func (m *Document) validateCustomerSnapshot(formats strfmt.Registry) error {
 
@@ -451,6 +459,7 @@ func (m *Document) validateDueDate(formats strfmt.Registry) error {
 	return nil
 }
 
+/*
 func (m *Document) validateEditedAt(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.EditedAt) { // not required
@@ -463,6 +472,7 @@ func (m *Document) validateEditedAt(formats strfmt.Registry) error {
 
 	return nil
 }
+*/
 
 func (m *Document) validateItems(formats strfmt.Registry) error {
 

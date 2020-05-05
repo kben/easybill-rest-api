@@ -216,7 +216,8 @@ type Customer struct {
 
 	// since date
 	// Format: date
-	SinceDate *strfmt.Date `json:"since_date,omitempty"`
+	// XXX: ignore for now...
+	//SinceDate *strfmt.Date `json:"since_date,omitempty"`
 
 	// street
 	Street *string `json:"street,omitempty"`
@@ -240,7 +241,8 @@ type Customer struct {
 	// updated at
 	// Read Only: true
 	// Format: datetime
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	// XXX: ignore for now...
+	//UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// vat identifier
 	VatIdentifier *string `json:"vat_identifier,omitempty"`
@@ -313,15 +315,7 @@ func (m *Customer) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateSinceDate(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateTaxOptions(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUpdatedAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -723,19 +717,6 @@ func (m *Customer) validateSepaAgreementDate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Customer) validateSinceDate(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.SinceDate) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("since_date", "body", "date", m.SinceDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 var customerTypeTaxOptionsPropEnum []interface{}
 
 func init() {
@@ -794,19 +775,6 @@ func (m *Customer) validateTaxOptions(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateTaxOptionsEnum("tax_options", "body", *m.TaxOptions); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *Customer) validateUpdatedAt(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.UpdatedAt) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("updated_at", "body", "datetime", m.UpdatedAt.String(), formats); err != nil {
 		return err
 	}
 

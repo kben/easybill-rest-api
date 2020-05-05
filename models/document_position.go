@@ -7,6 +7,7 @@ package models
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -289,7 +290,7 @@ func (m *DocumentPosition) validateQuantity(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("quantity", "body", string(*m.Quantity), 10); err != nil {
+	if err := validate.MaxLength("quantity", "body", fmt.Sprintf("%f", *m.Quantity), 10); err != nil {
 		return err
 	}
 
